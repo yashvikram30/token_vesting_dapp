@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::{
     associated_token::AssociatedToken, token_interface::{Mint, TokenAccount, TokenInterface, TransferChecked}
 };
-
+use anchor_spl::token_interface;
 declare_id!("FqzkXZdwYjurnUKetJCAvaUw5WAqbwzU6gZEwydeEfqS");
 
 #[program]
@@ -43,7 +43,7 @@ pub mod vesting {
         Ok(())
     }
 
-    pub fn claim_tokens(ctx: Context<ClaimTokens>, company_name: String) -> Result<()>{
+    pub fn claim_tokens(ctx: Context<ClaimTokens>, _company_name: String) -> Result<()>{
         let employee_account = &mut ctx.accounts.employee_account;
 
         let now: i64 = Clock::get()?.unix_timestamp;
@@ -91,7 +91,12 @@ pub mod vesting {
             &[ctx.accounts.vesting_account.treasury_bump]]
         ];
 
-        
+        let cpi_context = CpiContext::new(cpi_program,transfer_cpi_accounts).with_signer(signer_seeds);
+
+        let decimals = ctx.accounts.mint.decimals;
+
+        token_interface:: transfer_checked(cpi_context, claimable_amount as u64, decimals)?;
+        employee_account.total_withdrawn += claimable_amount;
         
         Ok(())
     }
@@ -163,6 +168,7 @@ pub struct CreateEmployeeAccount<'info>{
 }
 
 #[derive(Accounts)]
+#[instruction(company_name:String)]
 pub struct ClaimTokens<'info>{
 
     #[account(mut)]
