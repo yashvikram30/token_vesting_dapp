@@ -71,27 +71,6 @@
           "pda": {
             "seeds": [
               {
-                "kind": "const",
-                "value": [
-                  118,
-                  101,
-                  115,
-                  116,
-                  105,
-                  110,
-                  103,
-                  95,
-                  116,
-                  114,
-                  101,
-                  97,
-                  115,
-                  117,
-                  114,
-                  121
-                ]
-              },
-              {
                 "kind": "arg",
                 "path": "company_name"
               }
@@ -191,16 +170,16 @@
       ]
     },
     {
-      "name": "create_employee_account",
+      "name": "create_employee_vesting",
       "discriminator": [
-        94,
-        118,
-        255,
-        19,
-        171,
-        159,
-        58,
-        107
+        213,
+        201,
+        100,
+        57,
+        56,
+        236,
+        201,
+        124
       ],
       "accounts": [
         {
@@ -270,7 +249,7 @@
         },
         {
           "name": "total_amount",
-          "type": "u64"
+          "type": "i64"
         },
         {
           "name": "cliff_time",
@@ -345,11 +324,11 @@
           }
         },
         {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
+          "name": "token_program"
         },
         {
-          "name": "token_program"
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -392,22 +371,12 @@
     {
       "code": 6000,
       "name": "ClaimNotAvailableYet",
-      "msg": "Claim not available yet"
+      "msg": "Claiming is not available yet."
     },
     {
       "code": 6001,
-      "name": "InvalidVestingPeriod",
-      "msg": "Invalid vesting period"
-    },
-    {
-      "code": 6002,
-      "name": "CalculationOverflow",
-      "msg": "Calculation overflowed"
-    },
-    {
-      "code": 6003,
-      "name": "NothingtoClaim",
-      "msg": "Nothing to claim"
+      "name": "NothingToClaim",
+      "msg": "There is nothing to claim."
     }
   ],
   "types": [
@@ -429,20 +398,20 @@
             "type": "i64"
           },
           {
+            "name": "total_amount",
+            "type": "i64"
+          },
+          {
+            "name": "total_withdrawn",
+            "type": "i64"
+          },
+          {
             "name": "cliff_time",
             "type": "i64"
           },
           {
             "name": "vesting_account",
             "type": "pubkey"
-          },
-          {
-            "name": "total_amount",
-            "type": "u64"
-          },
-          {
-            "name": "total_withdrawn",
-            "type": "u64"
           },
           {
             "name": "bump",

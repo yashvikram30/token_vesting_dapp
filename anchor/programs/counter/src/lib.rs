@@ -79,7 +79,7 @@ pub mod vesting {
         let transfer_cpi_accounts = TransferChecked {
             from: ctx.accounts.treasury_token_account.to_account_info(),
             mint: ctx.accounts.mint.to_account_info(),
-            to: ctx.accounts.beneficiary.to_account_info(),
+            to: ctx.accounts.employee_token_account.to_account_info(), // ✅ Fixed: Transfer to employee_token_account
             authority: ctx.accounts.treasury_token_account.to_account_info()
         };
 
@@ -101,8 +101,6 @@ pub mod vesting {
         Ok(())
     }
 }
-
-
 
 
 // this is the CreateVestingAccount context, which stores information about all the accounts which are required in the create_vesting_account instruction

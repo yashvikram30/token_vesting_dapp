@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/vesting.json`.
  */
 export type Vesting = {
-  "address": "FqzkXZdwYjurnUKetJCAvaUw5WAqbwzU6gZEwydeEfqS",
+  "address": "GFdLg11UBR8ZeePW43ZyD1gY4z4UQ96LPa22YBgnn4z8",
   "metadata": {
     "name": "vesting",
     "version": "0.1.0",
@@ -76,27 +76,6 @@ export type Vesting = {
           "writable": true,
           "pda": {
             "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  118,
-                  101,
-                  115,
-                  116,
-                  105,
-                  110,
-                  103,
-                  95,
-                  116,
-                  114,
-                  101,
-                  97,
-                  115,
-                  117,
-                  114,
-                  121
-                ]
-              },
               {
                 "kind": "arg",
                 "path": "companyName"
@@ -197,16 +176,16 @@ export type Vesting = {
       ]
     },
     {
-      "name": "createEmployeeAccount",
+      "name": "createEmployeeVesting",
       "discriminator": [
-        94,
-        118,
-        255,
-        19,
-        171,
-        159,
-        58,
-        107
+        213,
+        201,
+        100,
+        57,
+        56,
+        236,
+        201,
+        124
       ],
       "accounts": [
         {
@@ -276,7 +255,7 @@ export type Vesting = {
         },
         {
           "name": "totalAmount",
-          "type": "u64"
+          "type": "i64"
         },
         {
           "name": "cliffTime",
@@ -351,11 +330,11 @@ export type Vesting = {
           }
         },
         {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
+          "name": "tokenProgram"
         },
         {
-          "name": "tokenProgram"
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -398,22 +377,12 @@ export type Vesting = {
     {
       "code": 6000,
       "name": "claimNotAvailableYet",
-      "msg": "Claim not available yet"
+      "msg": "Claiming is not available yet."
     },
     {
       "code": 6001,
-      "name": "invalidVestingPeriod",
-      "msg": "Invalid vesting period"
-    },
-    {
-      "code": 6002,
-      "name": "calculationOverflow",
-      "msg": "Calculation overflowed"
-    },
-    {
-      "code": 6003,
-      "name": "nothingtoClaim",
-      "msg": "Nothing to claim"
+      "name": "nothingToClaim",
+      "msg": "There is nothing to claim."
     }
   ],
   "types": [
@@ -435,20 +404,20 @@ export type Vesting = {
             "type": "i64"
           },
           {
+            "name": "totalAmount",
+            "type": "i64"
+          },
+          {
+            "name": "totalWithdrawn",
+            "type": "i64"
+          },
+          {
             "name": "cliffTime",
             "type": "i64"
           },
           {
             "name": "vestingAccount",
             "type": "pubkey"
-          },
-          {
-            "name": "totalAmount",
-            "type": "u64"
-          },
-          {
-            "name": "totalWithdrawn",
-            "type": "u64"
           },
           {
             "name": "bump",
